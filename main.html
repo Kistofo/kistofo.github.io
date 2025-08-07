@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Progress Group - Consultoría Organizacional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f8f9ff;
+            min-height: 100vh;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .logo {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .nav-item {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .nav-item:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+        h2 {
+            font-size: 2.2em;
+            margin: 30px 0 20px;
+            color: #1a202c;
+            text-align: center;
+        }
+        h3 {
+            font-size: 1.6em;
+            margin: 20px 0 15px;
+            color: #2d3748;
+        }
+        p {
+            margin-bottom: 15px;
+            color: #4a5568;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .service-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        .test-container {
+            margin: 40px 0;
+        }
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-column h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .footer-column p, .footer-column a {
+            color: #cbd5e0;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .footer-column a:hover {
+            color: #667eea;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            color: #cbd5e0;
+            font-size: 0.9em;
+            border-top: 1px solid #4a5568;
+            margin-top: 40px;
+        }
+        /* Estilos específicos para el test */
+        .diagnostic-test {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 40px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .test-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .test-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .test-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .test-content {
+            padding: 40px;
+        }
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .question-container.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.4em;
+            color: #2d3748;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        .option {
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+            transform: translateX(5px);
+        }
+        .option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        }
+        .option-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #edf2f7;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-right: 15px;
+        }
+        .option.selected .option-letter {
+            background: #667eea;
+            color: white;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-prev {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        .btn-prev:hover {
+            background: #cbd5e0;
+        }
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex-grow: 1;
+        }
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .results {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .results.active {
+            display: block;
+        }
+        .score-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .score-title {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        .score-value {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dimension-results {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .dimension-card {
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f7fafc;
+            border-radius: 0 10px 10px 0;
+        }
+        .dimension-name {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        .dimension-description {
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .dimension-score {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .score-bar {
+            flex-grow: 1;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+        .recommendations {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+        .recommendations h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .recommendation-list {
+            list-style: none;
+        }
+        .recommendation-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            align-items: start;
+        }
+        .recommendation-list li:before {
+            content: "→";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        .cta-section {
+            margin-top: 40px;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        .cta-section h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .contact-form {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+        .contact-form.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .test-header h2 {
+                font-size: 2em;
+            }
+            .question-text {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Human Progress Group</div>
+            <div class="tagline">Transformamos empresas mediante la optimización organizacional y el desarrollo del talento</div>
+            <nav class="nav">
+                <a href="#" class="nav-item">Inicio</a>
+                <a href="#" class="nav-item">Servicios</a>
+                <a href="#" class="nav-item">Casos de Éxito</a>
+                <a href="#" class="nav-item">Sobre Nosotros</a>
+                <a href="#" class="nav-item">Contacto</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Diagnostica la Madurez de tu Empresa en 5 minutos</h1>
+                <p>Nuestro test diagnóstico te ayudará a identificar las áreas clave de mejora en tu organización, desde la estructura hasta la gestión del talento. Recibe un informe personalizado con recomendaciones específicas para tu negocio.</p>
+                <p>Millones de empresas enfrentan desafíos similares: falta de procesos, dificultad para escalar, alta rotación de personal. Descubre cómo tu organización se compara y qué pasos concretos puedes tomar para transformarla.</p>
+                <a href="#diagnostic-test" class="btn-primary">Comenzar Test Diagnóstico</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://placehold.co/500x400/667eea/ffffff?text=Diagnóstico+Organizacional" alt="Test Diagnóstico Organizacional">
+            </div>
+        </section>
+
+        <section id="services">
+            <h2>Nuestros Servicios</h2>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Diagnóstico Organizacional</h3>
+                    <p>Evalúa el estado actual de tu empresa en áreas clave como estructura, procesos, finanzas y gestión del talento.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Optimización de Procesos</h3>
+                    <p>Sistematiza tus operaciones para aumentar la eficiencia, reducir costos y mejorar la calidad del servicio.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Gestión del Talento</h3>
+                    <p>Implementa sistemas de objetivos, desarrollo profesional y retención del talento clave.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="diagnostic-test" class="test-container">
+            <h2>Test Diagnóstico Organizacional</h2>
+            <div class="diagnostic-test">
+                <div class="test-header">
+                    <h2>Test Diagnóstico Organizacional</h2>
+                    <p>10 preguntas para entender el estado actual de tu empresa</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                </div>
+                <div class="test-content">
+                    <div class="question-container active" data-question="1" data-dimension="Estructura Organizacional">
+                        <div class="question-number">Pregunta 1 de 10</div>
+                        <div class="question-text">¿Cuántos empleados tiene actualmente tu empresa?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                1-5 empleados
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                6-10 empleados
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                11-30 empleados
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                31-50 empleados
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Más de 50 empleados
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="2" data-dimension="Estructura Organizacional">
+                        <div class="question-number">Pregunta 2 de 10</div>
+                        <div class="question-text">¿Tiene tu empresa un organigrama formal con roles y responsabilidades claramente definidos?</div>
+                        <div class="options">
+                            <div class="option" data-value="5">
+                                <span class="option-letter">A</span>
+                                Sí, completamente documentado y todos lo conocen
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">B</span>
+                                Sí, pero solo algunos lo conocen
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Existe informalmente, todos saben a quién reportar
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">D</span>
+                                Es confuso, hay duplicidad de funciones
+                            </div>
+                            <div class="option" data-value="1">
+                                <span class="option-letter">E</span>
+                                No existe, todo es informal
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="3" data-dimension="Gestión Financiera">
+                        <div class="question-number">Pregunta 3 de 10</div>
+                        <div class="question-text">¿Con qué frecuencia experimentas estos problemas? "No sé si estamos ganando o perdiendo dinero hasta fin de mes"</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                Siempre (es nuestro pan de cada día)
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Frecuentemente (más de 3 veces al mes)
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                A veces (1-2 veces al mes)
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                Raramente (tenemos control pero podría mejorar)
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Nunca (tenemos dashboards en tiempo real)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="4" data-dimension="Procesos y Sistemas">
+                        <div class="question-number">Pregunta 4 de 10</div>
+                        <div class="question-text">Cuando un empleado clave se va de vacaciones o se enferma, ¿qué sucede?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                Caos total, nadie sabe hacer su trabajo
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Problemas graves, intentamos improvisar
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Algunos problemas, pero nos arreglamos
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                Tenemos backup parcial, funciona con dificultad
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Todo sigue normal, tenemos procesos documentados
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="5" data-dimension="Estructura Organizacional">
+                        <div class="question-number">Pregunta 5 de 10</div>
+                        <div class="question-text">¿Cómo describirías la toma de decisiones importantes en tu empresa?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                Todo pasa por el dueño/gerente, cuello de botella constante
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Muy centralizada, genera retrasos frecuentes
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Algunas decisiones delegadas, pero falta claridad
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                Bien delegada con límites claros
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Matriz de decisiones clara, todos saben sus límites
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="6" data-dimension="Gestión Financiera">
+                        <div class="question-number">Pregunta 6 de 10</div>
+                        <div class="question-text">¿Tienes indicadores (KPIs) para medir el desempeño de tu negocio?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                No, solo vemos las ventas del mes
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Tenemos algunos básicos (ventas, gastos)
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Varios indicadores pero no los revisamos sistemáticamente
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                KPIs definidos, los revisamos mensualmente
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Dashboard completo, revisión semanal, todos alineados
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="7" data-dimension="Gestión Financiera">
+                        <div class="question-number">Pregunta 7 de 10</div>
+                        <div class="question-text">¿Cómo manejas los costos en tu empresa?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                No sé exactamente cuánto me cuesta cada producto/servicio
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Tengo una idea aproximada, pero no está documentado
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Conozco los costos principales, pero no todos
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                Sistema de costeo básico implementado
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Costeo detallado por producto/servicio/cliente
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="8" data-dimension="Gestión del Talento">
+                        <div class="question-number">Pregunta 8 de 10</div>
+                        <div class="question-text">¿Tus empleados saben exactamente qué se espera de ellos?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                No, van resolviendo según aparecen los problemas
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Tienen idea general, pero no hay metas claras
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Algunos tienen objetivos, otros no
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                La mayoría tiene objetivos definidos
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Todos tienen OKRs claros y medibles
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="9" data-dimension="Procesos y Sistemas">
+                        <div class="question-number">Pregunta 9 de 10</div>
+                        <div class="question-text">Si tuvieras que vender tu empresa mañana, ¿podría funcionar sin ti?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                Imposible, yo soy la empresa
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                Colapsaría en semanas
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Funcionaría con dificultades por 2-3 meses
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                Podría funcionar, pero necesitaría ajustes
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Funcionaría perfectamente, todo está sistematizado
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-container" data-question="10" data-dimension="Gestión del Talento">
+                        <div class="question-number">Pregunta 10 de 10</div>
+                        <div class="question-text">¿Cuál es tu mayor dolor de cabeza como dueño/gerente?</div>
+                        <div class="options">
+                            <div class="option" data-value="1">
+                                <span class="option-letter">A</span>
+                                Todo es urgente, vivo apagando incendios
+                            </div>
+                            <div class="option" data-value="2">
+                                <span class="option-letter">B</span>
+                                No sé si el negocio es realmente rentable
+                            </div>
+                            <div class="option" data-value="3">
+                                <span class="option-letter">C</span>
+                                Los empleados no rinden como esperaba
+                            </div>
+                            <div class="option" data-value="4">
+                                <span class="option-letter">D</span>
+                                Quiero crecer pero no sé cómo hacerlo ordenadamente
+                            </div>
+                            <div class="option" data-value="5">
+                                <span class="option-letter">E</span>
+                                Optimizar lo que ya funciona bien
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results" id="results">
+                        <div class="score-card">
+                            <div class="score-title">Tu Índice de Madurez Organizacional</div>
+                            <div class="score-value" id="totalScore">0%</div>
+                        </div>
+                        <div class="dimension-results">
+                            <div class="dimension-card">
+                                <div class="dimension-name">🏗️ Estructura Organizacional</div>
+                                <div class="dimension-description">Claridad de roles, organigrama y delegación</div>
+                                <div class="dimension-score">
+                                    <div class="score-bar">
+                                        <div class="score-fill" id="estructuraScore" style="width: 0%"></div>
+                                    </div>
+                                    <span id="estructuraValue">0%</span>
+                                </div>
+                            </div>
+                            <div class="dimension-card">
+                                <div class="dimension-name">💰 Gestión Financiera</div>
+                                <div class="dimension-description">Control de costos, rentabilidad y flujo de caja</div>
+                                <div class="dimension-score">
+                                    <div class="score-bar">
+                                        <div class="score-fill" id="finanzasScore" style="width: 0%"></div>
+                                    </div>
+                                    <span id="finanzasValue">0%</span>
+                                </div>
+                            </div>
+                            <div class="dimension-card">
+                                <div class="dimension-name">⚙️ Procesos y Sistemas</div>
+                                <div class="dimension-description">Documentación, automatización y continuidad</div>
+                                <div class="dimension-score">
+                                    <div class="score-bar">
+                                        <div class="score-fill" id="procesosScore" style="width: 0%"></div>
+                                    </div>
+                                    <span id="procesosValue">0%</span>
+                                </div>
+                            </div>
+                            <div class="dimension-card">
+                                <div class="dimension-name">👥 Gestión del Talento</div>
+                                <div class="dimension-description">Objetivos claros, desarrollo y rendimiento</div>
+                                <div class="dimension-score">
+                                    <div class="score-bar">
+                                        <div class="score-fill" id="talentoScore" style="width: 0%"></div>
+                                    </div>
+                                    <span id="talentoValue">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendations">
+                            <h3>🎯 Tus 3 Prioridades Inmediatas</h3>
+                            <ul class="recommendation-list" id="recommendationsList">
+                            </ul>
+                        </div>
+                        <div class="cta-section">
+                            <h3>¿Listo para transformar tu empresa?</h3>
+                            <p>Podemos ayudarte a implementar estas mejoras en 90 días</p>
+                            <button class="cta-button" onclick="showContactForm()">Solicitar Consultoría Gratuita</button>
+                        </div>
+                        <div class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label>Nombre completo</label>
+                                <input type="text" id="nombre" placeholder="Juan Pérez">
+                            </div>
+                            <div class="form-group">
+                                <label>Empresa</label>
+                                <input type="text" id="empresa" placeholder="Mi Empresa S.A.">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="email" placeholder="juan@miempresa.cl">
+                            </div>
+                            <div class="form-group">
+                                <label>Teléfono</label>
+                                <input type="tel" id="telefono" placeholder="+56 9 1234 5678">
+                            </div>
+                            <div class="form-group">
+                                <label>¿Cuál es tu mayor desafío actual?</label>
+                                <textarea id="desafio" placeholder="Cuéntanos brevemente qué te quita el sueño..."></textarea>
+                            </div>
+                            <button class="btn btn-next" onclick="enviarFormulario()">Enviar y Recibir Plan de Acción</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <div class="services">
+                <div class="service-card">
+                    <p>"El diagnóstico reveló problemas que ni siquiera sabíamos que teníamos. En 6 meses, duplicamos nuestra productividad y redujimos los costos operativos en un 30%."</p>
+                    <p><strong>María González</strong><br>CEO, TechSolutions</p>
+                </div>
+                <div class="service-card">
+                    <p>"Antes vivía en la empresa 12 horas diarias. Hoy, con los procesos sistematizados, puedo tomar vacaciones y todo sigue funcionando perfectamente."</p>
+                    <p><strong>Carlos Rodríguez</strong><br>Director, Manufacturas Andinas</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Human Progress Group</h3>
+                <p>Transformamos empresas mediante la optimización organizacional y el desarrollo del talento.</p>
+                <p>Consultoría estratégica para empresas que buscan crecer de manera sostenible.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <a href="#">Diagnóstico Organizacional</a>
+                <a href="#">Optimización de Procesos</a>
+                <a href="#">Gestión del Talento</a>
+                <a href="#">Transformación Digital</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p>✉️ hola@humanprogressgroup.com</p>
+                <p>📞 +56 9 1234 5678</p>
+                <p>📍 Santiago, Chile</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Human Progress Group. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = document.querySelectorAll('.question-container');
+            const options = document.querySelectorAll('.option');
+            const progressBar = document.getElementById('progressBar');
+            const resultsSection = document.getElementById('results');
+            const totalScoreElem = document.getElementById('totalScore');
+            const recommendationsList = document.getElementById('recommendationsList');
+            const contactForm = document.getElementById('contactForm');
+            let currentQuestion = 0;
+            const answers = {};
+            const dimensions = {
+                'Estructura Organizacional': 0,
+                'Gestión Financiera': 0,
+                'Procesos y Sistemas': 0,
+                'Gestión del Talento': 0
+            };
+            const dimensionCounts = {
+                'Estructura Organizacional': 0,
+                'Gestión Financiera': 0,
+                'Procesos y Sistemas': 0,
+                'Gestión del Talento': 0
+            };
+            // Contar preguntas por dimensión
+            questions.forEach(q => {
+                const dimension = q.dataset.dimension;
+                if (dimension) {
+                    dimensionCounts[dimension]++;
+                }
+            });
+            // Asignar los listeners de click a las opciones
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    handleOptionClick(option);
+                });
+            });
+            function handleOptionClick(option) {
+                const currentQuestionContainer = questions[currentQuestion];
+                const selectedOption = currentQuestionContainer.querySelector('.option.selected');
+                // Deseleccionar la opción previa si existe
+                if (selectedOption) {
+                    selectedOption.classList.remove('selected');
+                }
+                // Seleccionar la nueva opción
+                option.classList.add('selected');
+                // Guardar la respuesta
+                const questionNumber = parseInt(currentQuestionContainer.dataset.question);
+                const value = parseInt(option.dataset.value);
+                const dimension = currentQuestionContainer.dataset.dimension;
+                answers[questionNumber] = { value, dimension };
+                // Pasar a la siguiente pregunta después de un breve delay
+                setTimeout(() => {
+                    nextQuestion();
+                }, 300);
+            }
+            function nextQuestion() {
+                if (currentQuestion < questions.length - 1) {
+                    questions[currentQuestion].classList.remove('active');
+                    currentQuestion++;
+                    questions[currentQuestion].classList.add('active');
+                    updateProgressBar();
+                } else {
+                    // Fin del test
+                    questions[currentQuestion].classList.remove('active');
+                    showResults();
+                }
+            }
+            function updateProgressBar() {
+                const progress = ((currentQuestion + 1) / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            function showResults() {
+                calculateScores();
+                displayOverallScore();
+                displayDimensionScores();
+                displayRecommendations();
+                resultsSection.classList.add('active');
+                // Desplazar a la sección de resultados
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            function calculateScores() {
+                let total = 0;
+                for (const q in answers) {
+                    const answer = answers[q];
+                    total += answer.value;
+                    dimensions[answer.dimension] += answer.value;
+                }
+                const maxPossibleScore = 5 * questions.length;
+                const totalPercentage = (total / maxPossibleScore) * 100;
+                totalScoreElem.innerText = `${Math.round(totalPercentage)}%`;
+            }
+            function displayOverallScore() {
+                const maxPossibleScore = 5 * questions.length;
+                let total = 0;
+                for (const q in answers) {
+                    total += answers[q].value;
+                }
+                const totalPercentage = (total / maxPossibleScore) * 100;
+                totalScoreElem.innerText = `${Math.round(totalPercentage)}%`;
+            }
+            function displayDimensionScores() {
+                for (const dim in dimensions) {
+                    const maxDimScore = 5 * dimensionCounts[dim];
+                    const dimPercentage = (dimensions[dim] / maxDimScore) * 100;
+                    const scoreFill = document.getElementById(`${getDimId(dim)}Score`);
+                    const scoreValue = document.getElementById(`${getDimId(dim)}Value`);
+                    scoreFill.style.width = `${dimPercentage}%`;
+                    scoreValue.innerText = `${Math.round(dimPercentage)}%`;
+                }
+            }
+            function displayRecommendations() {
+                recommendationsList.innerHTML = '';
+                const sortedDimensions = Object.keys(dimensions).sort((a, b) => {
+                    const maxScoreA = 5 * dimensionCounts[a];
+                    const maxScoreB = 5 * dimensionCounts[b];
+                    const scoreA = (dimensions[a] / maxScoreA);
+                    const scoreB = (dimensions[b] / maxScoreB);
+                    return scoreA - scoreB;
+                });
+                const lowScoreRecommendations = {
+                    'Estructura Organizacional': 'Crea un organigrama claro y documenta los roles de cada persona.',
+                    'Gestión Financiera': 'Establece KPIs financieros y revisa los costos de tus productos/servicios.',
+                    'Procesos y Sistemas': 'Documenta los procesos clave para que la empresa no dependa de una sola persona.',
+                    'Gestión del Talento': 'Define objetivos claros y medibles (OKRs) para tus empleados.'
+                };
+                const top3 = sortedDimensions.slice(0, 3);
+                top3.forEach(dim => {
+                    const li = document.createElement('li');
+                    li.innerText = lowScoreRecommendations[dim];
+                    recommendationsList.appendChild(li);
+                });
+            }
+            function getDimId(dimensionName) {
+                const mapping = {
+                    'Estructura Organizacional': 'estructura',
+                    'Gestión Financiera': 'finanzas',
+                    'Procesos y Sistemas': 'procesos',
+                    'Gestión del Talento': 'talento'
+                };
+                return mapping[dimensionName];
+            }
+            window.showContactForm = () => {
+                contactForm.classList.add('active');
+                // Desplazar a la vista del formulario
+                contactForm.scrollIntoView({ behavior: 'smooth' });
+            }
+            window.enviarFormulario = () => {
+                // Validar campos
+                const nombre = document.getElementById('nombre').value;
+                const empresa = document.getElementById('empresa').value;
+                const email = document.getElementById('email').value;
+                const telefono = document.getElementById('telefono').value;
+                const desafio = document.getElementById('desafio').value;
+                
+                if (!nombre || !empresa || !email || !telefono || !desafio) {
+                    alert('Por favor, completa todos los campos del formulario.');
+                    return;
+                }
+                
+                // Aquí iría la lógica para enviar los datos al servidor
+                console.log('Datos del formulario:', {
+                    nombre,
+                    empresa,
+                    email,
+                    telefono,
+                    desafio,
+                    respuestas: answers
+                });
+                
+                alert('¡Formulario enviado con éxito! Un consultor se pondrá en contacto contigo en menos de 24 horas para agendar una reunión gratuita.');
+                
+                // Resetear el formulario
+                document.getElementById('nombre').value = '';
+                document.getElementById('empresa').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('telefono').value = '';
+                document.getElementById('desafio').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
