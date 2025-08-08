@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Diagnóstico Organizacional - Human Progress Group</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .content {
+            padding: 40px;
+        }
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .question-container.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.4em;
+            color: #2d3748;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        .option {
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+            transform: translateX(5px);
+        }
+        .option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        }
+        .option-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #edf2f7;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-right: 15px;
+        }
+        .option.selected .option-letter {
+            background: #667eea;
+            color: white;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-prev {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        .btn-prev:hover {
+            background: #cbd5e0;
+        }
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex-grow: 1;
+        }
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .results {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .results.active {
+            display: block;
+        }
+        .score-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .score-title {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        .score-value {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .level-card {
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .level-vulnerable {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+        .level-stable {
+            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+        }
+        .level-growth {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+        .level-sustainable {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+        }
+        .level-card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .level-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .dimension-results {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .dimension-card {
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f7fafc;
+            border-radius: 0 10px 10px 0;
+        }
+        .dimension-name {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        .dimension-description {
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .dimension-score {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .score-bar {
+            flex-grow: 1;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+        .recommendations {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+        .recommendations h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .recommendation-list {
+            list-style: none;
+        }
+        .recommendation-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            align-items: start;
+        }
+        .recommendation-list li:before {
+            content: "→";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        .cta-section {
+            margin-top: 40px;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        .cta-section h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .contact-form {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+        .contact-form.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .dimension-explanation {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Test Diagnóstico Organizacional</h1>
+            <p>Evaluación basada en el modelo de niveles de madurez validado académicamente</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="quiz-container"></div>
+            <div class="results" id="results">
+                <!-- Puntuación Total -->
+                <div class="score-card">
+                    <div class="score-title">Índice de Madurez Organizacional</div>
+                    <div class="score-value" id="totalScore">0%</div>
+                </div>
+
+                <!-- Nivel de Madurez -->
+                <div class="level-card" id="maturity-level-card">
+                    <h2 id="maturity-level-title">Cargando nivel...</h2>
+                    <p id="maturity-level-description">Espere un momento.</p>
+                </div>
+
+                <!-- Desglose por dimensiones -->
+                <div class="dimension-results">
+                    <div class="dimension-card">
+                        <div class="dimension-name">🎯 Propósito y Estrategia</div>
+                        <div class="dimension-description">Claridad de objetivos, alineación y planeación estratégica</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="propósitoScore" style="width: 0%"></div>
+                            </div>
+                            <span id="propósitoValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="propósitoExplanation"></div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-name">🏗️ Estructura Organizacional</div>
+                        <div class="dimension-description">Organización, roles claros y procesos de toma de decisiones</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="estructuraScore" style="width: 0%"></div>
+                            </div>
+                            <span id="estructuraValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="estructuraExplanation"></div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-name">👥 Relaciones y Cultura</div>
+                        <div class="dimension-description">Comunicación, clima organizacional y valores compartidos</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="relacionesScore" style="width: 0%"></div>
+                            </div>
+                            <span id="relacionesValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="relacionesExplanation"></div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-name">💰 Recursos y Finanzas</div>
+                        <div class="dimension-description">Gestión de recursos financieros y control de costos</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="recursosScore" style="width: 0%"></div>
+                            </div>
+                            <span id="recursosValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="recursosExplanation"></div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-name">👥 Gestión del Talento</div>
+                        <div class="dimension-description">Desarrollo de personas, recompensas y trabajo en equipo</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="talentoScore" style="width: 0%"></div>
+                            </div>
+                            <span id="talentoValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="talentoExplanation"></div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-name">⚙️ Procesos y Tecnología</div>
+                        <div class="dimension-description">Sistemas, documentación y eficiencia operativa</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="procesosScore" style="width: 0%"></div>
+                            </div>
+                            <span id="procesosValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="procesosExplanation"></div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-name">🔄 Gestión del Conocimiento y Cambio</div>
+                        <div class="dimension-description">Aprendizaje organizacional, adaptabilidad y mejora continua</div>
+                        <div class="dimension-score">
+                            <div class="score-bar">
+                                <div class="score-fill" id="cambioScore" style="width: 0%"></div>
+                            </div>
+                            <span id="cambioValue">0%</span>
+                        </div>
+                        <div class="dimension-explanation" id="cambioExplanation"></div>
+                    </div>
+                </div>
+
+                <!-- Recomendaciones -->
+                <div class="recommendations">
+                    <h3>🎯 Tus 3 Prioridades Inmediatas</h3>
+                    <ul class="recommendation-list" id="recommendationsList"></ul>
+                </div>
+
+                <!-- Botón de contacto -->
+                <div class="cta-section">
+                    <h3>¿Listo para transformar tu empresa?</h3>
+                    <p>Podemos ayudarte a implementar estas mejoras en 90 días</p>
+                    <button class="cta-button" onclick="showContactForm()">Solicitar Consultoría Gratuita</button>
+                </div>
+
+                <!-- Formulario de contacto -->
+                <div class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label>Nombre completo</label>
+                        <input type="text" id="nombre" placeholder="Juan Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Empresa</label>
+                        <input type="text" id="empresa" placeholder="Mi Empresa S.A.">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" placeholder="juan@miempresa.cl">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" id="telefono" placeholder="+56 9 1234 5678">
+                    </div>
+                    <div class="form-group">
+                        <label>¿Cuál es tu mayor desafío actual?</label>
+                        <textarea id="desafio" placeholder="Cuéntanos brevemente qué te quita el sueño..."></textarea>
+                    </div>
+                    <button class="btn btn-next" onclick="enviarFormulario()">Enviar y Recibir Plan de Acción</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Definición de preguntas basadas en los documentos académicos
+        const allQuestions = [
+            {
+                text: "¿Cómo se define y comunica el propósito de la organización?",
+                dimension: "Propósito y Estrategia",
+                options: [
+                    { value: 5, text: "Claramente definido y comunicado a todos los empleados." },
+                    { value: 4, text: "Se comunica a menudo, pero podría ser más claro." },
+                    { value: 3, text: "Se conoce, pero no se comunica formalmente." },
+                    { value: 2, text: "Vago, ambiguo o conocido solo por la alta dirección." },
+                    { value: 1, text: "No existe un propósito formalmente declarado." }
+                ]
+            },
+            {
+                text: "¿Cómo se evalúa y planea el futuro de la organización?",
+                dimension: "Propósito y Estrategia",
+                options: [
+                    { value: 5, text: "Existen planes a largo plazo bien definidos y comunicados." },
+                    { value: 4, text: "Se realizan planes estratégicos de manera regular." },
+                    { value: 3, text: "La planeación es a corto plazo y reactiva." },
+                    { value: 2, text: "No existe un proceso de planeación formal." },
+                    { value: 1, text: "La empresa funciona sin una dirección clara." }
+                ]
+            },
+            {
+                text: "¿Cuál es el enfoque del liderazgo en la organización?",
+                dimension: "Propósito y Estrategia",
+                options: [
+                    { value: 5, text: "Proactivo, con alta participación en la toma de decisiones." },
+                    { value: 4, text: "Proactivo y basado en delegación de autoridad." },
+                    { value: 3, text: "Reactivo y basado en decisiones de diferentes niveles." },
+                    { value: 2, text: "Reactivo y basado en instrucciones descendentes." },
+                    { value: 1, text: "No hay un enfoque de liderazgo definido." }
+                ]
+            },
+            {
+                text: "¿Cómo se divide el trabajo y se organiza la estructura?",
+                dimension: "Estructura Organizacional",
+                options: [
+                    { value: 5, text: "La estructura es flexible y se adapta a las necesidades." },
+                    { value: 4, text: "Hay una estructura clara y eficiente." },
+                    { value: 3, text: "Estructura formal, pero a veces no se sigue." },
+                    { value: 2, text: "La estructura es rígida y crea barreras." },
+                    { value: 1, text: "La estructura es confusa y genera conflictos." }
+                ]
+            },
+            {
+                text: "¿Cómo se organiza la estructura de la empresa para lograr sus metas?",
+                dimension: "Estructura Organizacional",
+                options: [
+                    { value: 5, text: "Sistema de gestión basado en procesos efectivos que permiten flexibilidad." },
+                    { value: 4, text: "Las actividades se organizan por funciones." },
+                    { value: 3, text: "Hay algún sistema para organizar las actividades (software, manuales, etc.)." },
+                    { value: 2, text: "Algún activo físico tiene software que administra entrada y salida." },
+                    { value: 1, text: "No hay sistema organizacional definido." }
+                ]
+            },
+            {
+                text: "¿Cómo se toman las decisiones importantes en la organización?",
+                dimension: "Estructura Organizacional",
+                options: [
+                    { value: 5, text: "Matriz de decisiones clara, todos saben sus límites." },
+                    { value: 4, text: "Bien delegada con límites claros." },
+                    { value: 3, text: "Algunas decisiones delegadas, pero falta claridad." },
+                    { value: 2, text: "Muy centralizada, genera retrasos frecuentes." },
+                    { value: 1, text: "Todo pasa por el dueño/gerente, cuello de botella constante." }
+                ]
+            },
+            {
+                text: "¿Cómo se manejan los conflictos y las interacciones entre los miembros?",
+                dimension: "Relaciones y Cultura",
+                options: [
+                    { value: 5, text: "El conflicto se aborda de forma constructiva." },
+                    { value: 4, text: "Se fomenta la colaboración y el trabajo en equipo." },
+                    { value: 3, text: "Los conflictos se resuelven a menudo por los líderes." },
+                    { value: 2, text: "Los conflictos son frecuentes y no se resuelven adecuadamente." },
+                    { value: 1, text: "Hay poca interacción y comunicación entre departamentos." }
+                ]
+            },
+            {
+                text: "¿Cuál es el estado de la comunicación interna en la organización?",
+                dimension: "Relaciones y Cultura",
+                options: [
+                    { value: 5, text: "La comunicación es abierta, transparente y fluida." },
+                    { value: 4, text: "Se mantiene una comunicación efectiva y regular." },
+                    { value: 3, text: "La comunicación es a menudo unidireccional y formal." },
+                    { value: 2, text: "Existe una falta de comunicación que genera rumores." },
+                    { value: 1, text: "La comunicación es inexistente o muy pobre." }
+                ]
+            },
+            {
+                text: "¿Cómo se gestiona el conocimiento para responder a la adversidad?",
+                dimension: "Relaciones y Cultura",
+                options: [
+                    { value: 5, text: "Se fomenta el aprendizaje organizacional y el trabajo en equipo." },
+                    { value: 4, text: "El conocimiento es compartido y utilizado para resolver problemas." },
+                    { value: 3, text: "El conocimiento se retiene en silos o por individuos clave." },
+                    { value: 2, text: "No se utilizan los conocimientos para la toma de decisiones." },
+                    { value: 1, text: "La organización desconoce sus propias capacidades." }
+                ]
+            },
+            {
+                text: "¿Cómo se gestionan los recursos financieros?",
+                dimension: "Recursos y Finanzas",
+                options: [
+                    { value: 5, text: "La gestión financiera es óptima y estratégica." },
+                    { value: 4, text: "Los recursos se gestionan de forma competente." },
+                    { value: 3, text: "Existen deficiencias en el control financiero." },
+                    { value: 2, text: "Los recursos financieros son un problema constante." },
+                    { value: 1, text: "No hay un control sobre el uso de los recursos." }
+                ]
+            },
+            {
+                text: "¿Cómo se gestionan los recursos de la empresa?",
+                dimension: "Recursos y Finanzas",
+                options: [
+                    { value: 5, text: "Los recursos se gestionan con eficacia y teniendo en cuenta su escasez." },
+                    { value: 4, text: "Los recursos se gestionan de manera eficiente." },
+                    { value: 3, text: "Los recursos se gestionan de manera eficaz." },
+                    { value: 2, text: "Los recursos se gestionan para casos puntuales." },
+                    { value: 1, text: "No hay gestión de recursos definida." }
+                ]
+            },
+            {
+                text: "¿Cómo se manejan los costos en tu empresa?",
+                dimension: "Recursos y Finanzas",
+                options: [
+                    { value: 5, text: "Costeo detallado por producto/servicio/cliente." },
+                    { value: 4, text: "Sistema de costeo básico implementado." },
+                    { value: 3, text: "Conozco los costos principales, pero no todos." },
+                    { value: 2, text: "Tengo una idea aproximada, pero no está documentado." },
+                    { value: 1, text: "No sé exactamente cuánto me cuesta cada producto/servicio." }
+                ]
+            },
+            {
+                text: "¿Cómo se recompensa el desempeño y se motiva a los empleados?",
+                dimension: "Gestión del Talento",
+                options: [
+                    { value: 5, text: "El sistema de recompensas es justo y transparente." },
+                    { value: 4, text: "El desempeño se reconoce de forma regular." },
+                    { value: 3, text: "Las recompensas son esporádicas y subjetivas." },
+                    { value: 2, text: "El sistema de recompensas no está alineado con los objetivos." },
+                    { value: 1, text: "No hay un sistema claro de recompensas." }
+                ]
+            },
+            {
+                text: "¿Cómo se gestiona el talento humano?",
+                dimension: "Gestión del Talento",
+                options: [
+                    { value: 5, text: "El desarrollo del talento humano es una prioridad." },
+                    { value: 4, text: "Hay procesos claros de reclutamiento y capacitación." },
+                    { value: 3, text: "La gestión de RRHH es básica y reactiva." },
+                    { value: 2, text: "Hay una alta rotación y poca capacitación." },
+                    { value: 1, text: "No se invierte en el desarrollo de los empleados." }
+                ]
+            },
+            {
+                text: "¿Tus empleados saben exactamente qué se espera de ellos?",
+                dimension: "Gestión del Talento",
+                options: [
+                    { value: 5, text: "Todos tienen OKRs claros y medibles." },
+                    { value: 4, text: "La mayoría tiene objetivos definidos." },
+                    { value: 3, text: "Algunos tienen objetivos, otros no." },
+                    { value: 2, text: "Tienen idea general, pero no hay metas claras." },
+                    { value: 1, text: "No, van resolviendo según aparecen los problemas." }
+                ]
+            },
+            {
+                text: "¿Cómo se utilizan las herramientas y sistemas de apoyo?",
+                dimension: "Procesos y Tecnología",
+                options: [
+                    { value: 5, text: "Se utilizan herramientas y tecnología de vanguardia." },
+                    { value: 4, text: "Las herramientas son adecuadas y funcionales." },
+                    { value: 3, text: "Las herramientas son anticuadas, pero se usan." },
+                    { value: 2, text: "La falta de herramientas adecuadas limita el trabajo." },
+                    { value: 1, text: "No hay mecanismos útiles para apoyar la gestión." }
+                ]
+            },
+            {
+                text: "Cuando un empleado clave se va de vacaciones o se enferma, ¿qué sucede?",
+                dimension: "Procesos y Tecnología",
+                options: [
+                    { value: 5, text: "Todo sigue normal, tenemos procesos documentados." },
+                    { value: 4, text: "Tenemos backup parcial, funciona con dificultad." },
+                    { value: 3, text: "Algunos problemas, pero nos arreglamos." },
+                    { value: 2, text: "Problemas graves, intentamos improvisar." },
+                    { value: 1, text: "Caos total, nadie sabe hacer su trabajo." }
+                ]
+            },
+            {
+                text: "Si tuvieras que vender tu empresa mañana, ¿podría funcionar sin ti?",
+                dimension: "Procesos y Tecnología",
+                options: [
+                    { value: 5, text: "Funcionaría perfectamente, todo está sistematizado." },
+                    { value: 4, text: "Podría funcionar, pero necesitaría ajustes." },
+                    { value: 3, text: "Funcionaría con dificultades por 2-3 meses." },
+                    { value: 2, text: "Colapsaría en semanas." },
+                    { value: 1, text: "Imposible, yo soy la empresa." }
+                ]
+            },
+            {
+                text: "¿Cuál es la actitud de la organización frente a los cambios?",
+                dimension: "Gestión del Conocimiento y Cambio",
+                options: [
+                    { value: 5, text: "La organización abraza el cambio y lo busca activamente." },
+                    { value: 4, text: "La organización se adapta bien a los cambios necesarios." },
+                    { value: 3, text: "El cambio se ve con cautela y resistencia." },
+                    { value: 2, text: "La organización es muy resistente al cambio." },
+                    { value: 1, text: "Cualquier cambio desestabiliza la operación de la empresa." }
+                ]
+            },
+            {
+                text: "¿Cómo se implementan las iniciativas y estrategias?",
+                dimension: "Gestión del Conocimiento y Cambio",
+                options: [
+                    { value: 5, text: "Las iniciativas se implementan de forma rápida y efectiva." },
+                    { value: 4, text: "Se logran implementar las iniciativas con éxito." },
+                    { value: 3, text: "La implementación es lenta y con muchos obstáculos." },
+                    { value: 2, text: "Las iniciativas rara vez se implementan por completo." },
+                    { value: 1, text: "La empresa no tiene un proceso para implementar iniciativas." }
+                ]
+            },
+            {
+                text: "¿Qué tan bien gestiona su empresa los recursos para obtener resultados?",
+                dimension: "Gestión del Conocimiento y Cambio",
+                options: [
+                    { value: 5, text: "Gestión óptima con monitoreo continuo y mejora constante." },
+                    { value: 4, text: "Buena gestión con indicadores de desempeño claros." },
+                    { value: 3, text: "Gestión básica pero efectiva para las necesidades actuales." },
+                    { value: 2, text: "Gestión reactiva, solo para casos urgentes." },
+                    { value: 1, text: "No hay gestión sistemática de recursos." }
+                ]
+            },
+            {
+                text: "¿En qué se basan las prioridades de mejoras de su organización?",
+                dimension: "Gestión del Conocimiento y Cambio",
+                options: [
+                    { value: 5, text: "En análisis integral de tendencias y retroalimentación de todas las partes interesadas." },
+                    { value: 4, text: "En las necesidades y expectativas de clientes y empleados clave." },
+                    { value: 3, text: "En datos de satisfacción del cliente y métricas básicas." },
+                    { value: 2, text: "En problemas que surgen y criterios financieros básicos." },
+                    { value: 1, text: "No hay un proceso sistemático para establecer prioridades de mejora." }
+                ]
+            }
+        ];
+
+        // Variables del quiz
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        const totalQuestions = allQuestions.length;
+
+        // Inicializar el quiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = Array(totalQuestions).fill(null);
+            document.getElementById('quiz-container').innerHTML = '';
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Mostrar pregunta actual
+        function showQuestion() {
+            const question = allQuestions[currentQuestionIndex];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestionIndex] === index;
+                optionsHTML += `
+                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectOption(${index})">
+                        <span class="option-letter">${String.fromCharCode(65 + index)}</span>
+                        ${option.text}
+                    </div>
+                `;
+            });
+
+            const questionHTML = `
+                <div class="question-container active">
+                    <div class="question-number">Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}</div>
+                    <div class="question-text">${question.text}</div>
+                    <div class="options">${optionsHTML}</div>
+                    <div class="navigation">
+                        <button class="btn btn-prev" ${currentQuestionIndex === 0 ? 'disabled' : ''} onclick="prevQuestion()">Anterior</button>
+                        <button class="btn btn-next" id="nextBtn" ${userAnswers[currentQuestionIndex] === null ? 'disabled' : ''} onclick="nextQuestion()">Siguiente</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('quiz-container').innerHTML = questionHTML;
+        }
+
+        // Seleccionar opción
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Actualizar interfaz
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+            
+            // Habilitar botón siguiente
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Pregunta anterior
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+                updateProgressBar();
+            }
+        }
+
+        // Siguiente pregunta
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+                updateProgressBar();
+            } else {
+                showResults();
+            }
+        }
+
+        // Actualizar barra de progreso
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        // Calcular resultados
+        function calculateResults() {
+            const dimensionScores = {
+                "Propósito y Estrategia": { sum: 0, count: 0 },
+                "Estructura Organizacional": { sum: 0, count: 0 },
+                "Relaciones y Cultura": { sum: 0, count: 0 },
+                "Recursos y Finanzas": { sum: 0, count: 0 },
+                "Gestión del Talento": { sum: 0, count: 0 },
+                "Procesos y Tecnología": { sum: 0, count: 0 },
+                "Gestión del Conocimiento y Cambio": { sum: 0, count: 0 }
+            };
+
+            let totalSum = 0;
+
+            allQuestions.forEach((question, index) => {
+                const answerIndex = userAnswers[index];
+                if (answerIndex !== null) {
+                    const value = question.options[answerIndex].value;
+                    totalSum += value;
+                    dimensionScores[question.dimension].sum += value;
+                    dimensionScores[question.dimension].count++;
+                }
+            });
+
+            const results = {};
+            let totalPercentage = 0;
+
+            Object.keys(dimensionScores).forEach(dimension => {
+                const { sum, count } = dimensionScores[dimension];
+                if (count > 0) {
+                    const percentage = (sum / (count * 5)) * 100;
+                    results[dimension] = Math.round(percentage);
+                    totalPercentage += percentage;
+                }
+            });
+
+            totalPercentage = totalPercentage / Object.keys(dimensionScores).length;
+
+            return { 
+                dimensionScores: results, 
+                totalPercentage: Math.round(totalPercentage) 
+            };
+        }
+
+        // Mostrar resultados
+        function showResults() {
+            document.querySelector('.question-container').style.display = 'none';
+            document.getElementById('results').classList.add('active');
+
+            const { dimensionScores, totalPercentage } = calculateResults();
+            document.getElementById('totalScore').textContent = `${totalPercentage}%`;
+
+            // Determinar nivel de madurez
+            let level, levelClass, levelDesc;
+            if (totalPercentage < 30) {
+                level = "Vulnerable";
+                levelClass = "level-vulnerable";
+                levelDesc = "Tu organización enfrenta desafíos críticos en múltiples áreas. Es necesario implementar sistemas básicos de gestión y claridad en roles y procesos.";
+            } else if (totalPercentage < 50) {
+                level = "Estable";
+                levelClass = "level-stable";
+                levelDesc = "Tienes una base funcional, pero hay oportunidades significativas para mejorar la estructura y los procesos organizacionales.";
+            } else if (totalPercentage < 75) {
+                level = "Crecimiento";
+                levelClass = "level-growth";
+                levelDesc = "Tu organización muestra buenas prácticas, pero puede alcanzar un nivel superior mediante la estandarización y mejora continua.";
+            } else {
+                level = "Sostenible";
+                levelClass = "level-sustainable";
+                levelDesc = "Excelente nivel de madurez. Tu organización es resiliente y está preparada para crecer de manera sostenible.";
+            }
+
+            const levelCard = document.getElementById('maturity-level-card');
+            levelCard.className = 'level-card ' + levelClass;
+            document.getElementById('maturity-level-title').textContent = level;
+            document.getElementById('maturity-level-description').textContent = levelDesc;
+
+            // Actualizar puntuaciones por dimensión
+            const dimensions = {
+                "Propósito y Estrategia": "propósito",
+                "Estructura Organizacional": "estructura",
+                "Relaciones y Cultura": "relaciones",
+                "Recursos y Finanzas": "recursos",
+                "Gestión del Talento": "talento",
+                "Procesos y Tecnología": "procesos",
+                "Gestión del Conocimiento y Cambio": "cambio"
+            };
+
+            Object.keys(dimensions).forEach(dimension => {
+                const shortName = dimensions[dimension];
+                const score = dimensionScores[dimension];
+                document.getElementById(`${shortName}Score`).style.width = `${score}%`;
+                document.getElementById(`${shortName}Value`).textContent = `${score}%`;
+
+                // Generar explicación basada en puntaje
+                let explanation = '';
+                if (score < 30) {
+                    explanation = "Necesitas establecer sistemas básicos en esta área. Prioriza definir procesos claros y comunicación efectiva.";
+                } else if (score < 50) {
+                    explanation = "Tienes una base funcional, pero hay oportunidades para mejorar la consistencia y alineación.";
+                } else if (score < 75) {
+                    explanation = "Buena gestión, pero puedes optimizar procesos y fomentar la innovación.";
+                } else {
+                    explanation = "Excelente desempeño. Mantén estos estándares y busca oportunidades de mejora continua.";
+                }
+                document.getElementById(`${shortName}Explanation`).textContent = explanation;
+            });
+
+            // Generar recomendaciones
+            const recommendations = generateRecommendations(dimensionScores);
+            const recommendationsList = document.getElementById('recommendationsList');
+            recommendationsList.innerHTML = '';
+            recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.textContent = rec;
+                recommendationsList.appendChild(li);
+            });
+        }
+
+        // Generar recomendaciones
+        function generateRecommendations(dimensionScores) {
+            const lowDimensions = Object.entries(dimensionScores)
+                .filter(([_, score]) => score < 50)
+                .sort((a, b) => a[1] - b[1])
+                .slice(0, 3);
+
+            return lowDimensions.map(([dimension, score]) => {
+                const priorities = {
+                    "Propósito y Estrategia": "Definir una visión clara y planes estratégicos a largo plazo",
+                    "Estructura Organizacional": "Revisar y optimizar la estructura organizacional y flujos de decisión",
+                    "Relaciones y Cultura": "Fortalecer la comunicación interna y resolver conflictos de forma constructiva",
+                    "Recursos y Finanzas": "Implementar sistemas de control financiero y gestión de costos",
+                    "Gestión del Talento": "Desarrollar planes de carrera y sistemas de recompensas efectivos",
+                    "Procesos y Tecnología": "Documentar procesos clave y sistematizar operaciones",
+                    "Gestión del Conocimiento y Cambio": "Fomentar la adaptabilidad y la mejora continua"
+                };
+                return priorities[dimension] || `Mejorar en ${dimension}`;
+            });
+        }
+
+        // Mostrar formulario de contacto
+        function showContactForm() {
+            document.getElementById('contactForm').classList.add('active');
+        }
+
+        // Enviar formulario
+        function enviarFormulario() {
+            const nombre = document.getElementById('nombre').value;
+            const empresa = document.getElementById('empresa').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const desafio = document.getElementById('desafio').value;
+
+            // Validación básica
+            if (!nombre || !email) {
+                alert('Por favor completa al menos tu nombre y email');
+                return;
+            }
+
+            // Simular envío
+            alert('¡Gracias por tu solicitud! Un asesor se contactará contigo pronto.');
+            
+            // Resetear formulario
+            document.getElementById('contactForm').classList.remove('active');
+            document.getElementById('nombre').value = '';
+            document.getElementById('empresa').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('telefono').value = '';
+            document.getElementById('desafio').value = '';
+        }
+
+        // Iniciar quiz al cargar la página
+        document.addEventListener('DOMContentLoaded', startQuiz);
+    </script>
+</body>
+</html>
