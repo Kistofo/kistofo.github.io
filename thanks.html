@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por tu interés! - Human Progress Group</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f8f9ff;
+            min-height: 100vh;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .logo {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .nav-item {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .nav-item:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+        .thank-you-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .checkmark {
+            font-size: 5em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+        h2 {
+            font-size: 2.2em;
+            margin: 30px 0 20px;
+            color: #1a202c;
+        }
+        p {
+            margin-bottom: 15px;
+            color: #4a5568;
+            font-size: 1.1em;
+        }
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        .step-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        .highlight {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-column h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .footer-column p, .footer-column a {
+            color: #cbd5e0;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .footer-column a:hover {
+            color: #667eea;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            color: #cbd5e0;
+            font-size: 0.9em;
+            border-top: 1px solid #4a5568;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .thank-you-card {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Human Progress Group</div>
+            <div class="tagline">Transformamos empresas mediante la optimización organizacional y el desarrollo del talento</div>
+            <nav class="nav">
+                <a href="#" class="nav-item">Inicio</a>
+                <a href="#" class="nav-item">Servicios</a>
+                <a href="#" class="nav-item">Casos de Éxito</a>
+                <a href="#" class="nav-item">Sobre Nosotros</a>
+                <a href="#" class="nav-item">Contacto</a>
+            </nav>
+        </header>
+
+        <div class="thank-you-card">
+            <div class="checkmark">✓</div>
+            <h1>¡Gracias por tu interés!</h1>
+            <p>Hemos recibido tu información y el resultado de tu diagnóstico organizacional.</p>
+            <p>Un consultor especializado de Human Progress Group se pondrá en contacto contigo en menos de 24 horas hábiles para agendar tu reunión gratuita de análisis y plan de acción.</p>
+            
+            <div class="highlight">
+                <p>📧 <strong>Revisa tu bandeja de entrada y correos no deseados</strong> para no perderte nuestro mensaje</p>
+                <p>📱 También podríamos contactarte por WhatsApp al número que proporcionaste</p>
+            </div>
+
+            <h2>Tus próximos pasos</h2>
+            <div class="next-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Recepción de Información</h3>
+                    <p>Nuestro equipo revisará tu diagnóstico y preparará un análisis detallado de los resultados.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Reunión de Análisis</h3>
+                    <p>Agendaremos una videollamada de 45 minutos para analizar juntos los resultados y diseñar tu plan de acción personalizado.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Plan de Acción</h3>
+                    <p>Recibirás un plan detallado con las prioridades de mejora y cómo implementarlas en tu empresa.</p>
+                </div>
+            </div>
+
+            <p><strong>¿Tienes preguntas urgentes?</strong></p>
+            <p>Puedes escribirnos directamente a <a href="mailto:hola@humanprogressgroup.com" style="color: #667eea; text-decoration: none;">hola@humanprogressgroup.com</a> o llamar al <strong>+56 9 1234 5678</strong></p>
+            
+            <a href="index.html" class="btn-primary">Volver a la página principal</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Human Progress Group</h3>
+                <p>Transformamos empresas mediante la optimización organizacional y el desarrollo del talento.</p>
+                <p>Consultoría estratégica para empresas que buscan crecer de manera sostenible.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <a href="#">Diagnóstico Organizacional</a>
+                <a href="#">Optimización de Procesos</a>
+                <a href="#">Gestión del Talento</a>
+                <a href="#">Transformación Digital</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p>✉️ hola@humanprogressgroup.com</p>
+                <p>📞 +56 9 1234 5678</p>
+                <p>📍 Santiago, Chile</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Human Progress Group. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>
