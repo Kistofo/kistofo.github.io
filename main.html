@@ -1106,17 +1106,99 @@
                     return;
                 }
                 
-                // Aquí iría la lógica para enviar los datos al servidor
-                console.log('Datos del formulario:', {
-                    nombre,
-                    empresa,
-                    email,
-                    telefono,
-                    desafio,
-                    respuestas: answers
-                });
+                // Crear un formulario dinámico para enviar los datos
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'https://formsubmit.co/tu-email@gmail.com'; // ¡REEMPLAZA CON TU EMAIL!
+                form.target = '_blank'; // Abre en nueva pestaña para no salir de tu sitio
                 
-                alert('¡Formulario enviado con éxito! Un consultor se pondrá en contacto contigo en menos de 24 horas para agendar una reunión gratuita.');
+                // Campos obligatorios de FormSubmit
+                const honeypot = document.createElement('input');
+                honeypot.type = 'text';
+                honeypot.name = '_honey';
+                honeypot.style.display = 'none';
+                
+                const captcha = document.createElement('input');
+                captcha.type = 'hidden';
+                captcha.name = '_captcha';
+                captcha.value = 'false';
+                
+                // Campos del formulario
+                const nombreInput = document.createElement('input');
+                nombreInput.type = 'hidden';
+                nombreInput.name = 'nombre';
+                nombreInput.value = nombre;
+                
+                const empresaInput = document.createElement('input');
+                empresaInput.type = 'hidden';
+                empresaInput.name = 'empresa';
+                empresaInput.value = empresa;
+                
+                const emailInput = document.createElement('input');
+                emailInput.type = 'hidden';
+                emailInput.name = 'email';
+                emailInput.value = email;
+                
+                const telefonoInput = document.createElement('input');
+                telefonoInput.type = 'hidden';
+                telefonoInput.name = 'telefono';
+                telefonoInput.value = telefono;
+                
+                const desafioInput = document.createElement('input');
+                desafioInput.type = 'hidden';
+                desafioInput.name = 'desafio';
+                desafioInput.value = desafio;
+                
+                // Añadir resultados del test
+                const resultadosInput = document.createElement('input');
+                resultadosInput.type = 'hidden';
+                resultadosInput.name = 'resultados';
+                
+                // Calcular y formatear los resultados
+                let resultadosTexto = 'Resultados del Test Diagnóstico:\n\n';
+                let total = 0;
+                const maxPossibleScore = 5 * Object.keys(answers).length;
+                
+                for (const q in answers) {
+                    total += answers[q].value;
+                    resultadosTexto += `Pregunta ${q}: ${answers[q].value}/5\n`;
+                }
+                
+                const totalPercentage = (total / maxPossibleScore) * 100;
+                resultadosTexto += `\nPuntuación Total: ${Math.round(totalPercentage)}%`;
+                
+                resultadosInput.value = resultadosTexto;
+                
+                // Configuración del correo
+                const subject = document.createElement('input');
+                subject.type = 'hidden';
+                subject.name = '_subject';
+                subject.value = `Nuevo contacto desde Human Progress Group - ${empresa}`;
+                
+                const redirect = document.createElement('input');
+                redirect.type = 'hidden';
+                redirect.name = '_next';
+                redirect.value = 'https://tu-sitio.github.io/gracias.html'; // Página de agradecimiento
+                
+                // Añadir todos los elementos al formulario
+                form.appendChild(honeypot);
+                form.appendChild(captcha);
+                form.appendChild(nombreInput);
+                form.appendChild(empresaInput);
+                form.appendChild(emailInput);
+                form.appendChild(telefonoInput);
+                form.appendChild(desafioInput);
+                form.appendChild(resultadosInput);
+                form.appendChild(subject);
+                form.appendChild(redirect);
+                
+                // Enviar el formulario
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+                
+                // Mostrar mensaje de éxito
+                alert('¡Formulario enviado con éxito! Un consultor se pondrá en contacto contigo en menos de 24 horas.');
                 
                 // Resetear el formulario
                 document.getElementById('nombre').value = '';
