@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="A7lpRudcglAx-7LSj4fXtXLI24UjBke8I3b5JZyuEQU" />
     <title>Human Progress Group - Consultoría Organizacional</title>
     <style>
         * {
@@ -447,6 +446,69 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
+        .mini-capsules-section {
+            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        .mini-capsules-section h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .mini-capsules-section p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        .mini-capsules-button {
+            background: white;
+            color: #4facfe;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .mini-capsules-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .dual-cta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .cta-option {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .cta-option:hover {
+            transform: translateY(-10px);
+        }
+        .cta-option h4 {
+            font-size: 1.5em;
+            color: #2d3748;
+            margin: 20px 0 15px;
+        }
+        .cta-option p {
+            color: #718096;
+            margin-bottom: 25px;
+        }
+        .cta-option .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 100%;
+            margin-top: 0;
+        }
+        .capsule-option .btn-primary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
         .contact-form {
             display: none;
             margin-top: 30px;
@@ -484,7 +546,6 @@
             min-height: 100px;
             resize: vertical;
         }
-
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column;
@@ -517,7 +578,6 @@
                 <a href="#" class="nav-item">Contacto</a>
             </nav>
         </header>
-
         <section class="hero">
             <div class="hero-content">
                 <h1>Diagnostica la Madurez de tu Empresa en 5 minutos</h1>
@@ -529,7 +589,6 @@
                 <img src="https://placehold.co/500x400/667eea/ffffff?text=Diagnóstico+Organizacional" alt="Test Diagnóstico Organizacional">
             </div>
         </section>
-
         <section id="services">
             <h2>Nuestros Servicios</h2>
             <div class="services">
@@ -550,7 +609,6 @@
                 </div>
             </div>
         </section>
-
         <section id="diagnostic-test" class="test-container">
             <h2>Test Diagnóstico Organizacional</h2>
             <div class="diagnostic-test">
@@ -874,11 +932,23 @@
                             <ul class="recommendation-list" id="recommendationsList">
                             </ul>
                         </div>
-                        <div class="cta-section">
-                            <h3>¿Listo para transformar tu empresa?</h3>
-                            <p>Podemos ayudarte a implementar estas mejoras en 90 días</p>
-                            <button class="cta-button" onclick="showContactForm()">Solicitar Consultoría Gratuita</button>
+                        
+                        <!-- Sección modificada con dos opciones: Consultoría y Mini Cápsulas -->
+                        <div class="dual-cta">
+                            <div class="cta-option">
+                                <h4>Consultoría Personalizada</h4>
+                                <p>Un experto trabajará contigo de forma personalizada para implementar las mejoras identificadas en tu diagnóstico.</p>
+                                <p>Recibirás una sesión gratuita de análisis y un plan de acción detallado para transformar tu empresa en 90 días.</p>
+                                <button class="btn-primary" onclick="showContactForm()">Solicitar Consultoría Gratuita</button>
+                            </div>
+                            <div class="cta-option capsule-option">
+                                <h4>Mini Cápsulas de Implementación</h4>
+                                <p>¿Prefieres implementar tú mismo las mejoras? Adquiere nuestras mini cápsulas con videos tutoriales y herramientas prácticas.</p>
+                                <p>Cada cápsula incluye plantillas descargables, guías paso a paso y acceso a una comunidad de apoyo.</p>
+                                <a href="/capsulas.html" class="btn-primary">Ver Mini Cápsulas Disponibles</a>
+                            </div>
                         </div>
+                        
                         <div class="contact-form" id="contactForm">
                             <div class="form-group">
                                 <label>Nombre completo</label>
@@ -906,7 +976,6 @@
                 </div>
             </div>
         </section>
-
         <section id="testimonials">
             <h2>Lo que dicen nuestros clientes</h2>
             <div class="services">
@@ -921,7 +990,6 @@
             </div>
         </section>
     </div>
-
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -947,7 +1015,6 @@
             © 2025 Human Progress Group. Todos los derechos reservados.
         </div>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const questions = document.querySelectorAll('.question-container');
@@ -1156,7 +1223,7 @@
                 resultadosInput.name = 'resultados';
                 
                 // Calcular y formatear los resultados
-                let resultadosTexto = 'Resultados del Test Diagnóstico:\n\n';
+                let resultadosTexto = 'Resultados del Test Diagnóstico:\n';
                 let total = 0;
                 const maxPossibleScore = 5 * Object.keys(answers).length;
                 
